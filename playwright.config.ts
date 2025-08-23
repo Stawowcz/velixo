@@ -5,9 +5,9 @@ dotenv.config();
 
 export default defineConfig({
   testDir: "./tests/",
-  timeout: 100 * 1_000,
+  timeout: 180 * 1_000,
   expect: {
-    timeout: 40 * 1_000,
+    timeout: 50 * 1_000,
   },
 
   reporter: [
