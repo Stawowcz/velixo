@@ -66,19 +66,17 @@ The pipeline (`.github/workflows/tests.yml`) is configured to:
 
 ## Documentation
 
-Additional documentation is available in:
-`docs/TEST_CASES_TASK_1.md`
-`docs/TEST_ASSUMPTIONS_TASK_2.md`
+Additional documentation is available in:  
+- [docs/TEST_CASES_TASK_1.md](docs/TEST_CASES_TASK_1.md)  
+- [docs/TEST_ASSUMPTIONS_TASK_2.md](docs/TEST_ASSUMPTIONS_TASK_2.md)  
 
-This `docs/ TEST_CASES_TASK_1.md` includes:
+### docs/TEST_CASES_TASK_1.md includes:
+- Tests documentation for task 1  
 
-- Tests documentation for task 1
-
-This `docs/TEST_ASSUMPTIONS_TASK_2.md` includes:
-
+### docs/TEST_ASSUMPTIONS_TASK_2.md includes:
 - Test assumptions and design choices.  
 - Bottlenecks, limitations, and implemented workarounds.  
 - Alternative approaches for verifying Excel formulas.  
-- CI/CD details and known issues.  
+- CI/CD details and known issues. 
 
 ---
