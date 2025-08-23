@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      BASE_URL: ${{ secrets.EXCEL_BASEURL }}
+      EXCEL_BASEURL: ${{ secrets.EXCEL_BASEURL }}
       EXCEL_USER: ${{ secrets.EXCEL_USER }}
       EXCEL_PASSWORD: ${{ secrets.EXCEL_PASSWORD }}
 
