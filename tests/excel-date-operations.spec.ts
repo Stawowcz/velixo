@@ -3,7 +3,7 @@ import { test } from "@fixtures";
 import { env, DateUtils } from "@utils";
 import { promises as fs } from "fs";
 
-test.describe.only("Excel Online - TODAY() function", () => {
+test.describe("Excel Online - TODAY() function", () => {
   test.beforeEach(async ({ loginPage, page }) => {
     await loginPage.gotoExcel();
     await loginPage.loginToExcel(env.EXCEL_USER, env.EXCEL_PASSWORD);
@@ -115,7 +115,5 @@ test.describe.only("Excel Online - TODAY() function", () => {
         intervals: [10_000],
       })
       .toBe(expected);
-
-    await fs.writeFile("cellA1.txt", lastValue, "utf-8");
   });
 });
