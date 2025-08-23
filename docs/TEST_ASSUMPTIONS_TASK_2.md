@@ -25,8 +25,9 @@
 
 ## 3. Additional Deliverables and Assumptions
 - **Repository structure**:
-  - `src/pages`, `src/utils`, `src/fixtures`, `src/data` – clean separation of concerns.
+  - `src/pages`, `src/utils`, `src/fixtures`, `src/types` – clean separation of concerns.
   - `tests/` directory with well-structured test files.
+  - `docs/` directory with all documents and recording
 - **Demo recording** prepared to showcase test execution.
 - **Documentation** (this file) explains assumptions, design, and limitations.
 
@@ -34,12 +35,12 @@
 
 ## 4. Bottlenecks / Limitations / Workarounds
 - **Clipboard dependency**  
-  The test uses the clipboard API to verify the result of the `TODAY()` formula.  
+  The test uses the clipboard to verify the result of the `TODAY()` formula.  
   - *Limitation*: Clipboard permissions must be granted for the browser context.  
   - *Workaround*: Permissions are explicitly requested in the test configuration.  
 
 - **Excel Online rendering**  
-  Excel Online renders cells using a **canvas**, which prevents direct DOM-based value extraction.  
+  Excel Online renders cells in a way that prevents direct DOM-based value extraction.  
   - *Limitation*: Standard selectors (e.g., `page.locator()`) cannot be used to read formula results.  
   - *Workaround*: Clipboard approach ensures reliable value capture.  
 
@@ -57,13 +58,10 @@
 
 ## 5. Alternative Solutions
 - **DOM-based validation**  
-  If Microsoft exposed accessible DOM elements for cell values (instead of canvas), we could directly assert cell contents. Currently not feasible.  
+  If Microsoft exposed accessible DOM elements for cell values, we could directly assert cell contents. Currently not feasible.  
 
 - **API-level validation**  
   With access to Microsoft Graph API, it would be possible to query the workbook state and assert the value programmatically.  
-
-- **Visual validation**  
-  Another approach would be screenshot-based verification (e.g., comparing rendered date string on canvas). This is less stable but possible with tools like Playwright’s `toHaveScreenshot()`.  
 
 ---
 

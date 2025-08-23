@@ -32,8 +32,8 @@ jobs:
       - name: Install Playwright browsers
         run: npx playwright install --with-deps
 
-      - name: Run Playwright tests (all browsers)
-        run: npx playwright test --reporter=html --trace=retain-on-failure
+      - name: Run Playwright tests
+        run: npm run test:all
 
       - name: Upload Playwright HTML report
         if: always()
