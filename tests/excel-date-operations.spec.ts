@@ -1,7 +1,6 @@
 import { expect } from "@playwright/test";
 import { test } from "@fixtures";
-import { env, DateUtils } from "@utils";
-import { promises as fs } from "fs";
+import { env, DateUtils } from "@utils";;
 
 test.describe("Excel Online - TODAY() function", () => {
   test.beforeEach(async ({ loginPage, page }) => {
