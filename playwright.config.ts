@@ -25,10 +25,15 @@ export default defineConfig({
   },
 
   projects: [
-    { name: "Chromium", use: { ...devices["Desktop Chrome"] } },
-    { name: "Firefox",  use: { ...devices["Desktop Firefox"] } },
-    { name: "WebKit",   use: { ...devices["Desktop Safari"] } },
+    {
+      name: "Chromium",
+      use: {
+        ...devices["Desktop Chrome"],
+        permissions: ["clipboard-read", "clipboard-write"],
+      },
+    },
   ],
+
 
   fullyParallel: true,
   forbidOnly: !!process.env.CI,

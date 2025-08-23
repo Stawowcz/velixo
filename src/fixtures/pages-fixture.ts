@@ -11,9 +11,7 @@ export type PagesFixture = {
 
 export const test = base.extend<PagesFixture>({
   context: async ({ browser }, use) => {
-    const context = await browser.newContext({
-      permissions: ["clipboard-read", "clipboard-write"],
-    });
+    const context = await browser.newContext();
     await use(context);
     await context.close();
   },
