@@ -43,8 +43,6 @@ test.describe.only("Excel Online - TODAY() function", () => {
       }
     }
 
-    await fs.writeFile("cellA1.txt", cellValue, "utf-8");
-
     expect(success, `Expected TODAY() to match ${expected}, last value: "${cellValue}"`).toBe(true);
   });
 
@@ -77,11 +75,9 @@ test.describe.only("Excel Online - TODAY() function", () => {
 
       expect(cellValue, `Clipboard value: "${cellValue}", expected: ${expected}`).toBe(expected);
     }).toPass({
-      timeout: 80_000,   // 80 sekund
-      intervals: [10_000], // co 10s
+      timeout: 80_000,
+      intervals: [10_000],
     });
-
-    await fs.writeFile("cellA1.txt", cellValue, "utf-8");
   });
 
   // --- POLL VERSION ---
