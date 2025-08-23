@@ -22,7 +22,7 @@ npm install
 Create a `.env` file with the following variables in the root folder of repo:
 
 EXCEL_BASEURL=https://excel.cloud.microsoft/  
-EXCEL_USER=your=****** 
+EXCEL_USER=****** 
 EXCEL_PASSWORD=******
 
 In **CI**, these values are securely provided via **GitHub Secrets**.
