@@ -5,6 +5,8 @@ on:
     branches:
       - main
   pull_request:
+    branches:
+      - main
   workflow_dispatch:
 
 jobs:
@@ -13,8 +15,6 @@ jobs:
 
     env:
       EXCEL_BASEURL: ${{ secrets.EXCEL_BASEURL }}
-      EXCEL_USER: ${{ secrets.EXCEL_USER }}
-      EXCEL_PASSWORD: ${{ secrets.EXCEL_PASSWORD }}
       EXCEL_STORAGE_STATE: ${{ secrets.EXCEL_STORAGE_STATE }}
 
     steps:
@@ -42,15 +42,13 @@ jobs:
           head -c 200 storageState.json
           echo ""
           echo "=== End of preview ==="
-
-          # Walidacja – jeśli plik pusty, przerwij job
           if [ ! -s storageState.json ]; then
             echo " ERROR: storageState.json is empty!"
             exit 1
           fi
 
       - name: Run Playwright tests
-        run: npm run test:all
+        run: npm run test:main:chrome
 
       - name: Upload Playwright HTML report
         if: always()

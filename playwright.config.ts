@@ -16,25 +16,30 @@ export default defineConfig({
     ["html", { outputFolder: "playwright-report", open: "never" }],
   ],
 
-use: {
-  storageState: "storageState.json",
-  headless: true,
-  baseURL: env.EXCEL_BASEURL,
-  screenshot: "only-on-failure",
-  video: "retain-on-failure",
-  trace: "on-first-retry",
-},
+  use: {
+    headless: true,
+    baseURL: env.EXCEL_BASEURL,
+    screenshot: "only-on-failure",
+    video: "retain-on-failure",
+    trace: "on-first-retry",
+  },
 
   projects: [
     {
+      name: "setup",
+      testMatch: /.*auth-setup.spec.ts/,
+      use: { ...devices["Desktop Chrome"] },
+    },
+    {
       name: "Chromium",
+      testIgnore: /.*auth-setup.spec.ts/,
       use: {
         ...devices["Desktop Chrome"],
+        storageState: "storageState.json",
         permissions: ["clipboard-read", "clipboard-write"],
       },
     },
   ],
-
 
   fullyParallel: true,
   forbidOnly: !!process.env.CI,

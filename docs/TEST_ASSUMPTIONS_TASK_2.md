@@ -1,6 +1,7 @@
 # Test Assumptions – Task 2
 
 ## 1. Framework and Implementation
+
 - Implemented using **Playwright with TypeScript**.
 - The end-to-end test verifies the **Excel Online `TODAY()` function** in Chrome.
 - Three different strategies are provided:
@@ -8,22 +9,38 @@
   2. **`expect().toPass()`** – automatically retries until the condition passes or timeout is reached.
   3. **`expect.poll()`** – continuously polls at fixed intervals until the result matches the expectation.
 - Credentials and configuration data are stored in a **separate `.env` file**, not hardcoded.
-- Debugging is supported by attaching clipboard values from each attempt to the test report.
 
 ---
 
-## 2. Continuous Integration (CI)
+## 2. Setup & Authentication
+
+- A dedicated **setup project** is included (`test:setup` script).  
+- Running this project:
+  - Launches a login flow with `.env` credentials.
+  - Saves the authenticated session into `storageState.json`.
+- All test runs (`test:main:chrome`, `test:main:chrome:debug`) reuse this stored session to avoid repeating login.  
+- In **CI**, the `storageState.json` is restored from the GitHub Secret `EXCEL_STORAGE_STATE`.  
+- **Limitation:** `EXCEL_STORAGE_STATE` has a limited lifetime.  
+  If the session expires, tests will fail with authentication errors.  
+  To fix this, regenerate the session locally via `npm run test:setup` and update the GitHub Secret.
+
+---
+
+## 3. Continuous Integration (CI)
+
 - **GitHub Actions CI pipeline** is configured.
 - Pipeline steps include:
   - Install dependencies (`npm ci`).
-  - Run Playwright tests across supported browsers.
+  - Restore `storageState.json` from `EXCEL_STORAGE_STATE` secret.
+  - Run Playwright tests in Chromium.
   - Generate **Playwright HTML report**.
-  - Upload the report as an **artifact** for inspection.
-- This ensures consistent execution on every commit or pull request.
+  - Upload the report and traces as **artifacts**.
+- This ensures consistent execution on every commit or pull request to main branch.
 
 ---
 
-## 3. Additional Deliverables and Assumptions
+## 4. Framework structure and additional deliverables
+
 - **Repository structure**:
   - `src/pages`, `src/utils`, `src/fixtures`, `src/types` – clean separation of concerns.
   - `tests/` directory with well-structured test files.
@@ -33,42 +50,36 @@
 
 ---
 
-## 4. Bottlenecks / Limitations / Workarounds
+## 5. Bottlenecks / Limitations / Workarounds
+
 - **Clipboard dependency**  
-  The test uses the clipboard to verify the result of the `TODAY()` formula.  
-  - *Limitation*: Clipboard permissions must be granted for the browser context.  
-  - *Workaround*: Permissions are explicitly requested in the test configuration.  
+  The test uses the clipboard to verify the result of the `TODAY()` formula.
+  - _Limitation_: Clipboard permissions must be granted for the browser context.
+  - _Workaround_: Permissions are explicitly requested in the test configuration.
 
 - **Excel Online rendering**  
-  Excel Online renders cells in a way that prevents direct DOM-based value extraction.  
-  - *Limitation*: Standard selectors (e.g., `page.locator()`) cannot be used to read formula results.  
-  - *Workaround*: Clipboard approach ensures reliable value capture.  
+  Excel Online renders cells in a way that prevents direct DOM-based value extraction.
+  - _Limitation_: Standard selectors (e.g., `page.locator()`) cannot be used to read formula results.
+  - _Workaround_: Clipboard approach ensures reliable value capture.
 
 - **Execution flakiness**  
-  Formula evaluation may take additional time on Excel Online servers.  
-  - *Limitation*: Occasional mismatches between expected and actual values.  
-  - *Workaround*: Implemented retries via three strategies (`for`, `toPass`, `poll`) with extended timeouts.  
+  Formula evaluation may take additional time on Excel Online servers.
+  - _Limitation_: Occasional mismatches between expected and actual values.
+  - _Workaround_: Implemented retries via three strategies (`for`, `toPass`, `poll`) with extended timeouts.
 
 - **Browser scope**  
-  Tests are optimized for Chromium/Chrome due to stable clipboard implementation.  
-  - *Limitation*: Cross-browser support may be inconsistent.  
-  - *Workaround*: CI runs default in Chromium, while Firefox/WebKit can be added with adjustments.  
+  Tests are optimized for Chromium/Chrome due to stable clipboard implementation.
+  - _Limitation_: Cross-browser support may be inconsistent.
+  - _Workaround_: CI runs default in Chromium
 
 ---
 
-## 5. Alternative Solutions
+## 6. Alternative Solutions
+
 - **DOM-based validation**  
-  If Microsoft exposed accessible DOM elements for cell values, we could directly assert cell contents. Currently not feasible.  
+  If Microsoft exposed accessible DOM elements for cell values, we could directly assert cell contents. Currently not feasible.
 
 - **API-level validation**  
-  With access to Microsoft Graph API, it would be possible to query the workbook state and assert the value programmatically.  
+  With access to Microsoft API, it would be possible to query the workbook state and assert the value programmatically.
 
 ---
-
-✅ Requirements covered:
-- TypeScript + Playwright end-to-end test.
-- Config data stored separately.
-- Test framework integration.
-- GitHub CI pipeline.
-- Demo recording + documentation.
-- Clear bottlenecks, limitations, workarounds, and alternative solutions.

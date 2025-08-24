@@ -3,15 +3,13 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {
-    "test": "npx playwright test",
-    "test:debug:chrome": "npx playwright test --debug --project=Chromium",
-    "test:chrome": "npx playwright test --project=Chromium",
-    "test:firefox": "npx playwright test --project=Firefox",
-    "test:webkit": "npx playwright test --project=WebKit",
-    "test:all": "npx playwright test",
-    "report": "npx playwright show-report"
-  },
+"scripts": {
+  "test": "npx playwright test",
+  "test:setup": "npx playwright test --project=setup",
+  "test:main:chrome": "npx playwright test --project=Chromium",
+  "test:main:chrome:debug": "npx playwright test --debug --project=Chromium",
+  "report": "npx playwright show-report"
+},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Stawowcz/velixo.git"

@@ -1,23 +1,23 @@
 import { expect } from "@playwright/test";
 import { test } from "@fixtures";
-import { env, DateUtils } from "@utils";
-import * as fs from "fs"; // ⬅️ dodane
+import { DateUtils } from "@utils";
+import * as fs from "fs";
 
 test.describe("Excel Online - TODAY() function", () => {
   test.beforeEach(async ({ loginPage, page }) => {
     await loginPage.gotoExcel();
-    // await loginPage.loginToExcel(env.EXCEL_USER, env.EXCEL_PASSWORD);
     await page.waitForLoadState();
     await loginPage.clickCreateBlankWorkbook();
     await page.waitForLoadState();
 
-    // ⬇️ Zapis storageState.json dopiero po workbooku
-    // const state = await page.context().storageState();
-    // fs.writeFileSync("storageState.json", JSON.stringify(state, null, 2));
+    const state = await page.context().storageState();
+    fs.writeFileSync("storageState.json", JSON.stringify(state, null, 2));
   });
 
   // --- FOR LOOP VERSION ---
-  test("should verify TODAY() returns correct value (regular for)", async ({ workbookPage }, testInfo) => {
+  test("should verify TODAY() returns correct value (regular for)", async ({
+    workbookPage,
+  }, testInfo) => {
     const expected = DateUtils.todayFormatted("eu");
 
     let cellValue = "";
@@ -48,11 +48,16 @@ test.describe("Excel Online - TODAY() function", () => {
       }
     }
 
-    expect(success, `Expected TODAY() to match ${expected}, last value: "${cellValue}"`).toBe(true);
+    expect(
+      success,
+      `Expected TODAY() to match ${expected}, last value: "${cellValue}"`,
+    ).toBe(true);
   });
 
   // --- TO PASS VERSION ---
-  test("should verify TODAY() returns correct value (toPass)", async ({ workbookPage }, testInfo) => {
+  test("should verify TODAY() returns correct value (toPass)", async ({
+    workbookPage,
+  }, testInfo) => {
     const expected = DateUtils.todayFormatted("eu");
     let cellValue = "";
     let attempt = 0;
@@ -78,7 +83,10 @@ test.describe("Excel Online - TODAY() function", () => {
         body: Buffer.from(`Value: "${cellValue}"`),
       });
 
-      expect(cellValue, `Clipboard value: "${cellValue}", expected: ${expected}`).toBe(expected);
+      expect(
+        cellValue,
+        `Clipboard value: "${cellValue}", expected: ${expected}`,
+      ).toBe(expected);
     }).toPass({
       timeout: 80_000,
       intervals: [10_000],
@@ -86,39 +94,44 @@ test.describe("Excel Online - TODAY() function", () => {
   });
 
   // --- POLL VERSION ---
-  test("should verify TODAY() returns correct value (expect.poll)", async ({ workbookPage }, testInfo) => {
+  test("should verify TODAY() returns correct value (expect.poll)", async ({
+    workbookPage,
+  }, testInfo) => {
     const expected = DateUtils.todayFormatted("eu");
     let lastValue = "";
     let attempt = 0;
 
     await expect
-      .poll(async () => {
-        attempt++;
+      .poll(
+        async () => {
+          attempt++;
 
-        await workbookPage.clickIntoSheet();
-        await workbookPage.moveDown();
-        await workbookPage.exitEditMode();
-        await workbookPage.moveToHome();
+          await workbookPage.clickIntoSheet();
+          await workbookPage.moveDown();
+          await workbookPage.exitEditMode();
+          await workbookPage.moveToHome();
 
-        await workbookPage.typeFormula("=TODAY()");
-        await workbookPage.confirmFormula();
+          await workbookPage.typeFormula("=TODAY()");
+          await workbookPage.confirmFormula();
 
-        await workbookPage.moveUp();
-        await workbookPage.copyActiveCell();
-        lastValue = (await workbookPage.readClipboard()).trim();
+          await workbookPage.moveUp();
+          await workbookPage.copyActiveCell();
+          lastValue = (await workbookPage.readClipboard()).trim();
 
-        testInfo.attachments.push({
-          name: `Polling attempt: ${attempt}`,
-          contentType: "text/plain",
-          body: Buffer.from(`Value: "${lastValue}"`),
-        });
+          testInfo.attachments.push({
+            name: `Polling attempt: ${attempt}`,
+            contentType: "text/plain",
+            body: Buffer.from(`Value: "${lastValue}"`),
+          });
 
-        return lastValue;
-      }, {
-        message: `Expected TODAY() to match ${expected}, last value: "${lastValue}"`,
-        timeout: 80_000,
-        intervals: [10_000],
-      })
+          return lastValue;
+        },
+        {
+          message: `Expected TODAY() to match ${expected}, last value: "${lastValue}"`,
+          timeout: 80_000,
+          intervals: [10_000],
+        },
+      )
       .toBe(expected);
   });
 });

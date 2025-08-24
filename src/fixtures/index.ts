@@ -1,1 +1,1 @@
-export * from './pages-fixture'
+export * from "./pages-fixture";

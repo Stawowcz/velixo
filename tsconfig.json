@@ -8,7 +8,7 @@
     "moduleResolution": "Node",
     "resolveJsonModule": true,
     "skipLibCheck": true,
-    "baseUrl": ".", 
+    "baseUrl": ".",
     "paths": {
       "@fixtures": ["src/fixtures/index.ts"],
       "@fixtures/*": ["src/fixtures/*"],
@@ -23,9 +23,5 @@
       "@data/*": ["src/data/*"]
     }
   },
-  "include": [
-    "src/**/*.ts",
-    "tests/**/*.ts",
-    "playwright.config.ts"
-  ]
+  "include": ["src/**/*.ts", "tests/**/*.ts", "playwright.config.ts"]
 }

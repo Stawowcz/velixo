@@ -8,15 +8,15 @@ export class DateUtils {
     return value;
   }
 
-public static todayFormatted(format: "us" | "eu" = "us"): string {
-  const today = new Date();
-  const dd = String(today.getDate()).padStart(2, "0");
-  const mm = String(today.getMonth() + 1).padStart(2, "0");
-  const yyyy = today.getFullYear();
+  public static todayFormatted(format: "us" | "eu" = "us"): string {
+    const today = new Date();
+    const dd = String(today.getDate()).padStart(2, "0");
+    const mm = String(today.getMonth() + 1).padStart(2, "0");
+    const yyyy = today.getFullYear();
 
-  if (format === "eu") {
-    return `${dd}.${mm}.${yyyy}`;
+    if (format === "eu") {
+      return `${dd}.${mm}.${yyyy}`;
+    }
+    return `${mm}/${dd}/${yyyy}`;
   }
-  return `${mm}/${dd}/${yyyy}`;
-}
 }
