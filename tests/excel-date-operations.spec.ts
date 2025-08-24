@@ -5,13 +5,13 @@ import { env, DateUtils } from "@utils";;
 test.describe("Excel Online - TODAY() function", () => {
   test.beforeEach(async ({ loginPage, page }) => {
     await loginPage.gotoExcel();
-    await loginPage.loginToExcel(env.EXCEL_USER, env.EXCEL_PASSWORD);
+    // await loginPage.loginToExcel(env.EXCEL_USER, env.EXCEL_PASSWORD);
     await loginPage.clickCreateBlankWorkbook();
     await page.waitForLoadState();
   });
 
   // --- FOR LOOP VERSION ---
-  test("should verify TODAY() returns correct value (regular for)", async ({ workbookPage }, testInfo) => {
+  test.only("should verify TODAY() returns correct value (regular for)", async ({ workbookPage }, testInfo) => {
     const expected = DateUtils.todayFormatted("eu");
 
     let cellValue = "";

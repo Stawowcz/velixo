@@ -1,5 +1,6 @@
 import { Locator } from "@playwright/test";
 import { BasePage } from "@pages";
+import * as fs from "fs";
 
 export class LoginPage extends BasePage {
   private readonly signInText: Locator = this.page.getByText("Sign in");
@@ -58,7 +59,6 @@ public async loginToExcel(email: string, password: string): Promise<void> {
   await this.fillEmail(email);
   await this.clickNextButton();
 
-  // "Other ways" i "Use password" - tylko jeśli istnieją
   if (await this.otherWaysButton.isVisible()) {
     await this.clickOtherWaysButton();
   }
@@ -67,26 +67,27 @@ public async loginToExcel(email: string, password: string): Promise<void> {
     await this.clickUsePasswordButton();
   }
 
-  // hasło
   await this.fillPassword(password);
 
-  // scenariusz CI – Help us protect your account
-  // if (await this.problemLoc.isVisible()) {
-    await this.clickproblemLoc();       // wybierz "Email js*****@gmail.com"
-    await this.clickNextButton();       // kliknij Next
-  // }
+  if (await this.problemLoc.isVisible()) {
+    await this.clickproblemLoc();
+    await this.clickNextButton();
+  }
 
-  // standardowy flow
-  // await this.clickPrimaryButton();
+  await this.clickPrimaryButton();
 
-  // // jeszcze raz, gdyby znowu się pojawiło
-  // if (await this.problemLoc.isVisible()) {
-  //   await this.clickproblemLoc();
-  //   await this.clickNextButton();
-  // }
+  if (await this.problemLoc.isVisible()) {
+    await this.clickproblemLoc();
+    await this.clickNextButton();
+  }
 
-  // await this.clickPrimaryButton();
+  await this.clickPrimaryButton();
+
+  // ⬇️ Nowość: zapis sesji do pliku
+  // const state = await this.page.context().storageState();
+  // fs.writeFileSync("storageState.json", JSON.stringify(state));
 }
+
 
 
 }
