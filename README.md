@@ -23,9 +23,11 @@ npm install
 
 Create a `.env` file with the following variables in the root folder of repo:
 
+```bash
 EXCEL_BASEURL=https://excel.cloud.microsoft/  
 EXCEL_USER=your_email  
 EXCEL_PASSWORD=your_password
+```
 
 In **CI**, these values are securely provided via **GitHub Secrets**.
 
@@ -59,7 +61,7 @@ Run only main tests in Chromium (headless), using existing `storageState.json` (
 npm run test:main:chrome
 ```
 
-Run in debug mode (Chromium):
+Run in debug mode in Chromium:
 
 ```bash
 npm run test:main:chrome:debug
@@ -96,11 +98,11 @@ Additional documentation is available in:
 - [docs/TEST_CASES_TASK_1.md](docs/TEST_CASES_TASK_1.md)
 - [docs/TEST_ASSUMPTIONS_TASK_2.md](docs/TEST_ASSUMPTIONS_TASK_2.md)
 
-### docs/TEST_CASES_TASK_1.md includes:
+[docs/TEST_CASES_TASK_1.md](docs/TEST_CASES_TASK_1.md) includes:
 
 - Tests documentation for task 1
 
-### docs/TEST_ASSUMPTIONS_TASK_2.md includes:
+- [docs/TEST_ASSUMPTIONS_TASK_2.md](docs/TEST_ASSUMPTIONS_TASK_2.md) includes:
 
 - Test assumptions and design choices.
 - Framework authentication setup
