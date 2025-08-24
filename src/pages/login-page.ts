@@ -11,7 +11,7 @@ export class LoginPage extends BasePage {
   private readonly createWorkbookButton: Locator = this.page.getByRole("button", { name: "Create blank workbook" });
   private readonly otherWaysButton: Locator = this.page.getByRole('button', { name: 'Other ways to sign in' });
   private readonly usePasswordButton: Locator = this.page.getByRole("button", { name: "Use your password" });
-  private readonly problemLoc: Locator = this.page.locator('input[type="radio"][id="textproofOption0"]')
+  private readonly problemLoc: Locator = this.page.getByRole("radio", { name: "Email js*****@gmail.com" });
 
 
   public async gotoExcel(): Promise<void> {
