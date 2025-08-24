@@ -11,6 +11,7 @@ export class LoginPage extends BasePage {
   private readonly createWorkbookButton: Locator = this.page.getByRole("button", { name: "Create blank workbook" });
   private readonly otherWaysButton: Locator = this.page.getByRole('button', { name: 'Other ways to sign in' });
   private readonly usePasswordButton: Locator = this.page.getByRole("button", { name: "Use your password" });
+  private readonly problemLoc: Locator = this.page.getByText('Email js*****@gmail.com')
 
 
   public async gotoExcel(): Promise<void> {
@@ -20,6 +21,10 @@ export class LoginPage extends BasePage {
 
   public async clickSignInLink(): Promise<void> {
     await this.safeClick(this.signInLink);
+  }
+
+  public async clickproblemLoc(): Promise<void> {
+    await this.safeClick(this.problemLoc);
   }
 
   public async clickOtherWaysButton(): Promise<void> {
@@ -63,7 +68,13 @@ public async loginToExcel(email: string, password: string): Promise<void> {
   }
 
   await this.fillPassword(password);
+  if (await this.problemLoc.isVisible()) {
+    await this.clickproblemLoc()
+  }
   await this.clickPrimaryButton();
+  if (await this.problemLoc.isVisible()) {
+    await this.clickproblemLoc()
+  }
   await this.clickPrimaryButton();
 }
 
