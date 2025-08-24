@@ -9,6 +9,9 @@ export class LoginPage extends BasePage {
   private readonly passwordField: Locator = this.page.locator("#passwordEntry");
   private readonly primaryButton: Locator = this.page.getByTestId("primaryButton");
   private readonly createWorkbookButton: Locator = this.page.getByRole("button", { name: "Create blank workbook" });
+  private readonly otherWaysButton: Locator = this.page.getByRole('button', { name: 'Other ways to sign in' });
+  private readonly usePasswordButton: Locator = this.page.getByRole("button", { name: "Use your password" });
+
 
   public async gotoExcel(): Promise<void> {
     await this.goto(process.env.EXCEL_BASEURL);
@@ -19,6 +22,13 @@ export class LoginPage extends BasePage {
     await this.safeClick(this.signInLink);
   }
 
+  public async clickOtherWaysButton(): Promise<void> {
+    await this.safeClick(this.otherWaysButton);
+  }
+  
+  public async clickUsePasswordButton(): Promise<void> {
+    await this.safeClick(this.usePasswordButton);
+  }
   public async fillEmail(email: string): Promise<void> {
     await this.safeFill(this.emailField, email);
   }
@@ -38,12 +48,23 @@ export class LoginPage extends BasePage {
   public async clickCreateBlankWorkbook(): Promise<void> {
     await this.safeClick(this.createWorkbookButton);
   }
-  public async loginToExcel(email: string, password: string): Promise<void> {
-    await this.clickSignInLink();
-    await this.fillEmail(email);
-    await this.clickNextButton();
-    await this.fillPassword(password);
-    await this.clickPrimaryButton();
-    await this.clickPrimaryButton();
+public async loginToExcel(email: string, password: string): Promise<void> {
+  await this.clickSignInLink();
+  await this.fillEmail(email);
+  await this.clickNextButton();
+
+  // kliknij tylko jeśli przycisk jest widoczny
+  if (await this.otherWaysButton.isVisible()) {
+    await this.otherWaysButton.click();
   }
+
+  if (await this.usePasswordButton.isVisible()) {
+    await this.usePasswordButton.click();
+  }
+
+  await this.fillPassword(password);
+  await this.clickPrimaryButton();
+  await this.clickPrimaryButton();
+}
+
 }

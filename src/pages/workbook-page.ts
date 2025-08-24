@@ -33,7 +33,7 @@ export class WorkbookPage {
 
   async copyActiveCell(): Promise<void> {
     await this.page.keyboard.press("Control+c", { delay: 100 });
-    await this.page.waitForTimeout(300); // buffer dla schowka
+    await this.page.waitForTimeout(300);
   }
 
   async readClipboard(): Promise<string> {
