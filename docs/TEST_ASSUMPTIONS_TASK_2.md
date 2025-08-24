@@ -68,7 +68,7 @@
   - _Workaround_: Implemented retries via three strategies (`for`, `toPass`, `poll`) with extended timeouts.
 
 - **Browser scope**  
-  Tests are optimized for Chrome due to stable clipboard implementation.
+  Tests are optimized for chrome due to stable clipboard implementation.
   - _Limitation_: Cross-browser support may be inconsistent.
   - _Workaround_: CI runs in chrome on default
 
