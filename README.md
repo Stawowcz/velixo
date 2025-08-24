@@ -11,9 +11,11 @@ These tests can be executed locally or through **GitHub Actions CI**, with resul
 
 ## Installation
 
-git clone https://github.com/Stawowcz/velixo.git  
-cd velixo  
+```bash
+git clone https://github.com/Stawowcz/velixo.git
+cd velixo
 npm install
+```
 
 ---
 
@@ -35,8 +37,9 @@ A dedicated **setup test script** is included to handle authentication and gener
 This allows tests to re-use the logged-in session instead of going through the login flow every time.
 
 Run the setup project:
-
+```bash
 npm run test:setup
+```
 
 This will:
 
@@ -52,11 +55,15 @@ In **CI**, the `storageState.json` is restored from the `EXCEL_STORAGE_STATE` Gi
 
 Run only main tests in Chromium (headless), using existing `storageState.json` (without setup):  
 
+```bash
 npm run test:main:chrome
+```
 
 Run in debug mode (Chromium):
 
+```bash
 npm run test:main:chrome:debug
+```
 
 ---
 
@@ -66,7 +73,9 @@ npm run test:main:chrome:debug
 - Trace files (`on-first-retry`) are captured automatically.
 - To view the HTML report after a run:
 
+```bash
 npm run report
+```
 
 ---
 
