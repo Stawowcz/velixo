@@ -15,7 +15,7 @@ jobs:
       EXCEL_BASEURL: ${{ secrets.EXCEL_BASEURL }}
       EXCEL_USER: ${{ secrets.EXCEL_USER }}
       EXCEL_PASSWORD: ${{ secrets.EXCEL_PASSWORD }}
-      EXCEL_STORAGE_STATE: ${{ secrets.EXCEL_STORAGE_STATE }}   # ⬅️ dodajemy sekret z plikiem JSON
+      EXCEL_STORAGE_STATE: ${{ secrets.EXCEL_STORAGE_STATE }}
 
     steps:
       - name: Checkout repo
@@ -33,9 +33,21 @@ jobs:
       - name: Install Playwright browsers
         run: npx playwright install --with-deps
 
-      # 🔑 Przywrócenie pliku storageState.json ze secreta
       - name: Restore storageState.json
-        run: echo "$EXCEL_STORAGE_STATE" > storageState.json
+        run: |
+          echo "$EXCEL_STORAGE_STATE" > storageState.json
+          echo "=== storageState.json created ==="
+          ls -la storageState.json
+          echo "=== Preview of storageState.json (first 200 chars) ==="
+          head -c 200 storageState.json
+          echo ""
+          echo "=== End of preview ==="
+
+          # Walidacja – jeśli plik pusty, przerwij job
+          if [ ! -s storageState.json ]; then
+            echo " ERROR: storageState.json is empty!"
+            exit 1
+          fi
 
       - name: Run Playwright tests
         run: npm run test:all
