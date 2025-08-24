@@ -16,14 +16,14 @@ export default defineConfig({
     ["html", { outputFolder: "playwright-report", open: "never" }],
   ],
 
-  use: {
-    headless: true,
-    baseURL: env.EXCEL_BASEURL,
-    screenshot: "only-on-failure",
-    video: "retain-on-failure",
-    trace: "on-first-retry",
-    storageState: "storageState.json",
-  },
+use: {
+  storageState: "storageState.json",
+  headless: true,
+  baseURL: env.EXCEL_BASEURL,
+  screenshot: "only-on-failure",
+  video: "retain-on-failure",
+  trace: "on-first-retry",
+},
 
   projects: [
     {

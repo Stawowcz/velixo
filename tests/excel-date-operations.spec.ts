@@ -1,6 +1,7 @@
 import { expect } from "@playwright/test";
 import { test } from "@fixtures";
-import { env, DateUtils } from "@utils";;
+import { env, DateUtils } from "@utils";
+import * as fs from "fs"; // ⬅️ dodane
 
 test.describe("Excel Online - TODAY() function", () => {
   test.beforeEach(async ({ loginPage, page }) => {
@@ -8,10 +9,14 @@ test.describe("Excel Online - TODAY() function", () => {
     // await loginPage.loginToExcel(env.EXCEL_USER, env.EXCEL_PASSWORD);
     await loginPage.clickCreateBlankWorkbook();
     await page.waitForLoadState();
+
+    // ⬇️ Zapis storageState.json dopiero po workbooku
+    // const state = await page.context().storageState();
+    // fs.writeFileSync("storageState.json", JSON.stringify(state, null, 2));
   });
 
   // --- FOR LOOP VERSION ---
-  test("should verify TODAY() returns correct value (regular for)", async ({ workbookPage }, testInfo) => {
+  test.only("should verify TODAY() returns correct value (regular for)", async ({ workbookPage }, testInfo) => {
     const expected = DateUtils.todayFormatted("eu");
 
     let cellValue = "";

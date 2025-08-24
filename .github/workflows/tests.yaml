@@ -35,7 +35,7 @@ jobs:
 
       - name: Restore storageState.json
         run: |
-          echo "$EXCEL_STORAGE_STATE" > storageState.json
+          echo "$EXCEL_STORAGE_STATE" | jq . > storageState.json
           echo "=== storageState.json created ==="
           ls -la storageState.json
           echo "=== Preview of storageState.json (first 200 chars) ==="

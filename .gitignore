@@ -9,3 +9,4 @@ cellA1.txt
 .env
 .DS_Store
 storageState.json
+storageState.min.json
