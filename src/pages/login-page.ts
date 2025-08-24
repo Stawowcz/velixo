@@ -17,7 +17,6 @@ export class LoginPage extends BasePage {
 
   public async gotoExcel(): Promise<void> {
     await this.goto(process.env.EXCEL_BASEURL);
-    await this.signInText.waitFor({ state: "visible" });
   }
 
   public async clickSignInLink(): Promise<void> {
