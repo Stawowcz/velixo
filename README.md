@@ -95,8 +95,8 @@ Tests run automatically in GitHub Actions:
 
 Additional documentation is available in:
 
-- [docs/TEST_CASES_TASK_1.md](docs/TEST_CASES_TASK_1.md)
-- [docs/TEST_ASSUMPTIONS_TASK_2.md](docs/TEST_ASSUMPTIONS_TASK_2.md)
+- [TEST_CASES_TASK_1.md](docs/TEST_CASES_TASK_1.md)
+- [TEST_ASSUMPTIONS_TASK_2.md](docs/TEST_ASSUMPTIONS_TASK_2.md)
 
 ### [TEST_CASES_TASK_1.md](docs/TEST_CASES_TASK_1.md) includes:
 
