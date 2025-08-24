@@ -7,6 +7,7 @@ test.describe("Excel Online - TODAY() function", () => {
   test.beforeEach(async ({ loginPage, page }) => {
     await loginPage.gotoExcel();
     // await loginPage.loginToExcel(env.EXCEL_USER, env.EXCEL_PASSWORD);
+    await page.waitForLoadState();
     await loginPage.clickCreateBlankWorkbook();
     await page.waitForLoadState();
 
