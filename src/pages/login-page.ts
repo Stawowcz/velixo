@@ -58,24 +58,35 @@ public async loginToExcel(email: string, password: string): Promise<void> {
   await this.fillEmail(email);
   await this.clickNextButton();
 
-  // kliknij tylko jeśli przycisk jest widoczny
+  // "Other ways" i "Use password" - tylko jeśli istnieją
   if (await this.otherWaysButton.isVisible()) {
-    await this.otherWaysButton.click();
+    await this.clickOtherWaysButton();
   }
 
   if (await this.usePasswordButton.isVisible()) {
-    await this.usePasswordButton.click();
+    await this.clickUsePasswordButton();
   }
 
+  // hasło
   await this.fillPassword(password);
+
+  // scenariusz CI – Help us protect your account
   if (await this.problemLoc.isVisible()) {
-    await this.clickproblemLoc()
+    await this.clickproblemLoc();       // wybierz "Email js*****@gmail.com"
+    await this.clickNextButton();       // kliknij Next
   }
+
+  // standardowy flow
   await this.clickPrimaryButton();
+
+  // jeszcze raz, gdyby znowu się pojawiło
   if (await this.problemLoc.isVisible()) {
-    await this.clickproblemLoc()
+    await this.clickproblemLoc();
+    await this.clickNextButton();
   }
+
   await this.clickPrimaryButton();
 }
+
 
 }
