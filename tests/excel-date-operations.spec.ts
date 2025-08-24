@@ -11,7 +11,7 @@ test.describe("Excel Online - TODAY() function", () => {
   });
 
   // --- FOR LOOP VERSION ---
-  test.only("should verify TODAY() returns correct value (regular for)", async ({ workbookPage }, testInfo) => {
+  test("should verify TODAY() returns correct value (regular for)", async ({ workbookPage }, testInfo) => {
     const expected = DateUtils.todayFormatted("eu");
 
     let cellValue = "";
