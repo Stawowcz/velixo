@@ -1,6 +1,5 @@
 import { Locator } from "@playwright/test";
 import { BasePage } from "@pages";
-import * as fs from "fs";
 
 export class LoginPage extends BasePage {
   private readonly signInText: Locator = this.page.getByText("Sign in");

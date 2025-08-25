@@ -1,13 +1,8 @@
-import { test as base, BrowserContext, Page } from "@playwright/test";
+import { test as base } from "@playwright/test";
 import { LoginPage } from "@pages/login-page";
 import { WorkbookPage } from "@pages/workbook-page";
+import { PagesFixture } from "@typings/fixtures";
 
-export type PagesFixture = {
-  context: BrowserContext;
-  page: Page;
-  loginPage: LoginPage;
-  workbookPage: WorkbookPage;
-};
 
 export const test = base.extend<PagesFixture>({
   context: async ({ browser }, use) => {
