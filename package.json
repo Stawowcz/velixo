@@ -3,13 +3,13 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-"scripts": {
-  "test": "npx playwright test",
-  "test:setup": "npx playwright test --project=setup",
-  "test:main:chrome": "npx playwright test --project=Chromium",
-  "test:main:chrome:debug": "npx playwright test --debug --project=Chromium",
-  "report": "npx playwright show-report"
-},
+  "scripts": {
+    "test": "npx playwright test",
+    "test:setup": "npx playwright test --project=setup",
+    "test:main:chrome": "npx playwright test --project=Chromium",
+    "test:main:chrome:debug": "npx playwright test --debug --project=Chromium",
+    "report": "npx playwright show-report"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Stawowcz/velixo.git"
@@ -24,7 +24,8 @@
   "homepage": "https://github.com/Stawowcz/velixo#readme",
   "devDependencies": {
     "@playwright/test": "^1.55.0",
-    "@types/node": "^24.3.0"
+    "@types/node": "^24.3.0",
+    "prettier": "^3.6.2"
   },
   "dependencies": {
     "dotenv": "^17.2.1"

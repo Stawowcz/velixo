@@ -4,18 +4,18 @@
 
 The purpose of this document is to test an algorithm that **increments a string** according to the following rules:
 
-- **Valid input:** 1–4 letters (A–Z or a–z) followed by 1–4 digits (0–9).  
-- **Operation:** The algorithm increments the **numeric suffix** by 1 while keeping the letter prefix unchanged.  
-- **Overflow:** If the numeric part exceeds its maximum value, it resets back to all zeros (e.g., `A9999 → A0000`).  
-- **Invalid input:** If the input does not follow the required format, the algorithm returns **`Error`**.  
-- **Letters can be uppercase or lowercase** (case-preserving).  
-- Only **English alphabet letters (A–Z, a–z)** are allowed.  
+- **Valid input:** 1–4 letters (A–Z or a–z) followed by 1–4 digits (0–9).
+- **Operation:** The algorithm increments the **numeric suffix** by 1 while keeping the letter prefix unchanged.
+- **Overflow:** If the numeric part exceeds its maximum value, it resets back to all zeros (e.g., `A9999 → A0000`).
+- **Invalid input:** If the input does not follow the required format, the algorithm returns **`Error`**.
+- **Letters can be uppercase or lowercase** (case-preserving).
+- Only **English alphabet letters (A–Z, a–z)** are allowed.
 
 ## Testing Goals
 
-- Verify correct behavior for **valid inputs** across different lengths and formats.  
-- Validate **boundary conditions** such as minimum/maximum digits, letters, and overflow cases.  
-- Ensure proper **error handling** for invalid inputs (e.g., missing letters/digits, too many characters, special symbols).  
+- Verify correct behavior for **valid inputs** across different lengths and formats.
+- Validate **boundary conditions** such as minimum/maximum digits, letters, and overflow cases.
+- Ensure proper **error handling** for invalid inputs (e.g., missing letters/digits, too many characters, special symbols).
 
 ---
 

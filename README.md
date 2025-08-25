@@ -24,8 +24,8 @@ npm install
 Create a `.env` file with the following variables in the root folder of repo:
 
 ```bash
-EXCEL_BASEURL=https://excel.cloud.microsoft/  
-EXCEL_USER=your_email  
+EXCEL_BASEURL=https://excel.cloud.microsoft/
+EXCEL_USER=your_email
 EXCEL_PASSWORD=your_password
 ```
 
@@ -39,6 +39,7 @@ A dedicated **setup test script** is included to handle authentication and gener
 This allows tests to re-use the logged-in session instead of going through the login flow every time.
 
 Run the setup project:
+
 ```bash
 npm run test:setup
 ```
@@ -55,7 +56,7 @@ In **CI**, the `storageState.json` is restored from the `EXCEL_STORAGE_STATE` Gi
 
 ## Running Tests Locally
 
-Run only main tests in Chromium (headless), using existing `storageState.json` (without setup):  
+Run only main tests in Chromium (headless), using existing `storageState.json` (without setup):
 
 ```bash
 npm run test:main:chrome

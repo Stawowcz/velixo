@@ -3,7 +3,6 @@ import { LoginPage } from "@pages/login-page";
 import { WorkbookPage } from "@pages/workbook-page";
 import { PagesFixture } from "@typings/fixtures";
 
-
 export const test = base.extend<PagesFixture>({
   context: async ({ browser }, use) => {
     const context = await browser.newContext();

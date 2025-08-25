@@ -2,7 +2,6 @@ import { Locator } from "@playwright/test";
 import { BasePage } from "@pages";
 
 export class LoginPage extends BasePage {
-  private readonly signInText: Locator = this.page.getByText("Sign in");
   private readonly signInLink: Locator = this.page.getByRole("link", {
     name: "Sign in",
   });
@@ -33,40 +32,41 @@ export class LoginPage extends BasePage {
     await this.goto(process.env.EXCEL_BASEURL);
   }
 
-  public async clickSignInLink(): Promise<void> {
+  private async clickSignInLink(): Promise<void> {
     await this.safeClick(this.signInLink);
   }
 
-  public async clickproblemLoc(): Promise<void> {
+  private async clickproblemLoc(): Promise<void> {
     await this.safeClick(this.problemLoc);
   }
 
-  public async clickOtherWaysButton(): Promise<void> {
+  private async clickOtherWaysButton(): Promise<void> {
     await this.safeClick(this.otherWaysButton);
   }
 
-  public async clickUsePasswordButton(): Promise<void> {
+  private async clickUsePasswordButton(): Promise<void> {
     await this.safeClick(this.usePasswordButton);
   }
-  public async fillEmail(email: string): Promise<void> {
+  private async fillEmail(email: string): Promise<void> {
     await this.safeFill(this.emailField, email);
   }
 
-  public async clickNextButton(): Promise<void> {
+  private async clickNextButton(): Promise<void> {
     await this.safeClick(this.nextButton);
   }
 
-  public async fillPassword(password: string): Promise<void> {
+  private async fillPassword(password: string): Promise<void> {
     await this.safeFill(this.passwordField, password);
   }
 
-  public async clickPrimaryButton(): Promise<void> {
+  private async clickPrimaryButton(): Promise<void> {
     await this.safeClick(this.primaryButton);
   }
 
   public async clickCreateBlankWorkbook(): Promise<void> {
     await this.safeClick(this.createWorkbookButton);
   }
+  
   public async loginToExcel(email: string, password: string): Promise<void> {
     await this.clickSignInLink();
     await this.fillEmail(email);

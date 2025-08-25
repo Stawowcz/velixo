@@ -14,12 +14,12 @@
 
 ## 2. Setup & Authentication
 
-- A dedicated **setup project** is included (`test:setup` script).  
+- A dedicated **setup project** is included (`test:setup` script).
 - Running this project:
   - Launches a login flow with `.env` credentials.
   - Saves the authenticated session into `storageState.json`.
-- All test runs (`test:main:chrome`, `test:main:chrome:debug`) reuse this stored session to avoid repeating login.  
-- In **CI**, the `storageState.json` is restored from the GitHub Secret `EXCEL_STORAGE_STATE`.  
+- All test runs (`test:main:chrome`, `test:main:chrome:debug`) reuse this stored session to avoid repeating login.
+- In **CI**, the `storageState.json` is restored from the GitHub Secret `EXCEL_STORAGE_STATE`.
 - **Limitation:** `EXCEL_STORAGE_STATE` has a limited lifetime.  
   If the session expires, tests will fail with authentication errors.  
   To fix this, regenerate the session locally via `npm run test:setup` and update the GitHub Secret.
